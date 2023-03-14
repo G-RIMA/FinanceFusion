@@ -1,0 +1,42 @@
+h3 {
+    text-align: left;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: larger;
+}
+.my-table {
+    border-collapse: collapse;
+    width: 80%;
+}
+
+thead {
+    border-collapse: collapse;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.my-table td, .my-table th, .my-table tr {
+    padding: 10px;
+    font-size: 16px;
+  }
+    
+td,tr{
+    text-align: left;
+    width: 45%;
+
+}
+  
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    
+}
+  
+td, th {
+    border: 1px solid #ddd;
+}
+
+tfoot {
+    border-collapse: collapse;
+    width: 45%;
+    padding: 10px;
+}
