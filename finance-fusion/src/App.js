@@ -1,11 +1,12 @@
 import './App.css';
 import React from "react";
-import Balancesheet from "./balancesheet.js";
+import Balancesheet from './balancesheet';
 
 function App() {
   return (
     <div>
-      <Balancesheet />      
+        < Balancesheet />
+       
     </div>
   );
 }

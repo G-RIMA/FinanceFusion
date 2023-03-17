@@ -3,20 +3,32 @@ import "./balancesheet.css";
 
 
 function Balancesheet() {
-    const [currentAssets, setCurrentAssets] = useState(0);
-    const [nonCurrentAssets, setNonCurrentAssets] = useState(0);
+  const [currentassets, setcurrentAssets] = useState([
+    { id: 1, name: 'Cash', value: 0 },
+    { id: 2, name: 'Accounts Receivable', value: 0 },
+    { id: 3, name: 'Inventory', value: 0 },
+    { id: 4, name: 'Prepaid Expenses', value: 0 },
+    {id: 5, name: 'Short-Term Investments', value: 0},
+    {id: 6, name: 'Deferred Income Taxes', value: 0},
+    { id: 7, name: 'Other Assets', value: 0 },
+  
+  ]);
 
-    function handleAssetChange(e, isCurrent) {
-        const value = parseFloat(e.target.value);
-        if (isCurrent) {
-          setCurrentAssets(currentAssets + value);
-        } else {
-          setNonCurrentAssets(nonCurrentAssets + value);
-        }
+  const totalcurrentAssets = currentassets.reduce((acc, currentasset) => acc + parseFloat(currentasset.value), 0);
+
+  const handleValueChange = (event, id) => {
+    const newValue = parseFloat(event.target.value);
+    const newcurrentAssets = currentassets.map((currentasset) => {
+      if (currentasset.id === id) {
+        return { ...currentasset, value: newValue };
+      } else {
+        return currentasset;
       }
-      const totalAssets = currentAssets + nonCurrentAssets;
-
-      
+    });
+    setcurrentAssets(newcurrentAssets);
+  };
+  
+  
     return (
       <div className="bal-container">
         <h3>Balance Sheet</h3>
@@ -24,7 +36,7 @@ function Balancesheet() {
           <td>
             <thead>
               <tr>
-                <th>Assets </th>
+                <th colSpan="2">Assets </th>
               </tr>
               <thead>
                 <tr>
@@ -33,46 +45,23 @@ function Balancesheet() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Cash & Cash Equivalents</td>
-                  <td>
-                    <input type="number" onChange={handleInputChange}/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Accountts Receivable</td>
-                  <td>
-                    <input type="number" onChange={handleInputChange} />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Inventory</td>
-                  <td>
-                    <input type="number" onChange={handleInputChange} />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Prepaid expenses</td>
-                  <td>
-                    <input type="number" onChange={handleInputChange} />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Short-term Investments</td>
-                  <td>
-                    <input type='number' onChange={handleInputChange}/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Deferred Income Taxes</td>
-                  <td>
-                    <input type='number' onChange={handleInputChange}/>
-                  </td>
-                </tr>
-                <tr>
+              {currentassets.map((currentasset) => (
+                <tr key={currentasset.id}>
+                <td>{currentasset.name}</td>
+                <td>
+                  <input
+                    type= "number"
+                    value={currentasset.value}
+                    onChange={(e) => handleValueChange(e, currentasset.id)}
+                  />
+                </td>
+              </tr>
+
+            ))}
+              <tr>
                   <td>Total Current Assets</td>
                   <td>
-                    {total}
+                    {totalcurrentAssets}
                   </td>
                 </tr>
               </tbody>
@@ -88,37 +77,37 @@ function Balancesheet() {
                 <tr>
                   <td>Property Plant & Equipment</td>
                   <td>
-                    <input type="number" onChange={handleInputChange}/>
+                    <input />
                   </td>
                 </tr>
                 <tr>
                   <td>Intangible Assets</td>
                   <td>
-                    <input type="number" onChange={handleInputChange}/>
+                    <input />
                   </td>
                 </tr>
                 <tr>
                   <td>Equity and other Investments</td>
                   <td>
-                    <input type="number" onChange={handleInputChange}/>
+                    <input />
                   </td>
                 </tr>
                 <tr>
                   <td>Good will</td>
                   <td>
-                    <input type="number"onChange={handleInputChange} />
+                    <input />
                   </td>
                 </tr>
                 <tr>
                   <td>Deferred Income Taxes</td>
                   <td>
-                    <input type="number" onChange={handleInputChange}/>
+                    <input />
                   </td>
                 </tr>
                 <tr>
-                  <td>Total Current Assets</td>
+                  <td>Total Non-Current Assets</td>
                   <td>
-                    {total}
+                    
                   </td>
                 </tr>
               </tbody>
@@ -241,7 +230,7 @@ function Balancesheet() {
                   </td>
                 </tr>
                 <tr>
-                  <td>Total Shareholder</td>
+                  <td>Total Shareholder Equity</td>
                   <td>
                     <input type="number"/>
                   </td>
@@ -253,7 +242,7 @@ function Balancesheet() {
         <th>
             <td>Total Assets</td>
             <td>
-                <input />
+                
             </td>
         </th>
         <th>
@@ -264,8 +253,9 @@ function Balancesheet() {
         </th>
       </tfoot>
       </table>
-
+      
       </div>
+      
     );
   }
   
