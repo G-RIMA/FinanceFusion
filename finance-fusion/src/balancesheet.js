@@ -54,6 +54,81 @@ function Balancesheet() {
 
   const totalAssets = totalcurrentAssets + totalnoncurrentassets;
 
+  const [currentliabilities, setcurrentLiabilities] = useState([
+    { id: 1, name: 'Cash', value: 0 },
+    { id: 2, name: 'Accounts Receivable', value: 0 },
+    { id: 3, name: 'Inventory', value: 0 },
+    { id: 4, name: 'Prepaid Expenses', value: 0 },
+    {id: 5, name: 'Short-Term Investments', value: 0},
+    {id: 6, name: 'Deferred Income Taxes', value: 0},
+    { id: 7, name: 'Other Current Assets', value: 0 },
+  
+  ]);
+
+  const totalcurrentLiabilities = currentliabilities.reduce((acc, currentliability) => acc + parseFloat(currentliability.value), 0);
+
+  const handleLiabChange = (event, id) => {
+    const newValue = parseFloat(event.target.value);
+    const newcurrentLiabilities = currentliabilities.map((currentliability) => {
+      if (currentliability.id === id) {
+        return { ...currentliability, value: newValue };
+      } else {
+        return currentliability;
+      }
+    });
+    setcurrentLiabilities(newcurrentLiabilities);
+  };
+
+  const [noncurrentliabilities, setnoncurrentLiabilities] = useState([
+    { id: 1, name: 'Property Plant & Equipment', value: 0 },
+    { id: 2, name: 'Intangible Assets', value: 0 },
+    { id: 3, name: 'Equity and Other Investment', value: 0 },
+    { id: 4, name: 'Good will', value: 0 },
+    {id: 5, name: 'Deferred Income taxes', value: 0},
+    { id: 7, name: 'Other Non-Current Assets', value: 0 },
+
+  ]);
+
+  const totalnoncurrentliabilities = noncurrentliabilities.reduce((acc, noncurrentliability) => acc + parseFloat(noncurrentliability.value), 0);
+
+  const handleNonLiabChange = (event, id) => {
+    const newValue = parseFloat(event.target.value);
+    const newnoncurrentLiabilities = noncurrentliabilities.map((noncurrentliability) => {
+      if (noncurrentliability.id === id) {
+        return { ...noncurrentliability, value: newValue };
+      } else {
+        return noncurrentliability;
+      }
+    });
+    setnoncurrentLiabilities(newnoncurrentLiabilities);
+  };
+
+  const [shares, setShares] = useState([
+    { id: 1, name: 'Cash', value: 0 },
+    { id: 2, name: 'Accounts Receivable', value: 0 },
+    { id: 3, name: 'Inventory', value: 0 },
+    { id: 4, name: 'Prepaid Expenses', value: 0 },
+    {id: 5, name: 'Short-Term Investments', value: 0},
+    {id: 6, name: 'Deferred Income Taxes', value: 0},
+    { id: 7, name: 'Other Assets', value: 0 },
+
+  ]);
+
+  const totalShares = shares.reduce((acc, share) => acc + parseFloat(share.value), 0);
+
+  const handleShareChange = (event, id) => {
+    const newValue = parseFloat(event.target.value);
+    const newShares = shares.map((share) => {
+      if (share.id === id) {
+        return { ...share, value: newValue };
+      } else {
+        return share;
+      }
+    });
+    setShares(newShares);
+  };
+
+  const totalLiabilities = totalcurrentLiabilities + totalnoncurrentliabilities + totalShares 
   
   
     return (
@@ -86,10 +161,10 @@ function Balancesheet() {
 
             ))}
               <tr>
-                  <td>Total Current Assets</td>
-                  <td>
+                  <th>Total Current Assets</th>
+                  <th>
                     {totalcurrentAssets}
-                  </td>
+                  </th>
                 </tr>
               </tbody>
             </thead>
@@ -114,10 +189,10 @@ function Balancesheet() {
             </tr>
           ))}
                 <tr>
-                  <td>Total Non-Current Assets</td>
-                  <td>
+                  <th>Total Non-Current Assets</th>
+                  <th>
                     {totalnoncurrentassets}
-                  </td>
+                  </th>
                 </tr>
               </tbody>
             </thead>
@@ -129,64 +204,29 @@ function Balancesheet() {
               </tr>
               <thead>
                 <tr>
-                  <th>Liabilities Assets</th>
+                  <th>Current Liabilities</th>
                   <th>Value</th>
                 </tr>
               </thead>
               <tbody>
+              {currentliabilities.map((currentliability) => (
+                <tr key={currentliability.id}>
+                <td>{currentliability.name}</td>
+                <td>
+                  <input
+                    type= "number"
+                    value={currentliability.value}
+                    onChange={(e) => handleLiabChange(e, currentliability.id)}
+                  />
+                </td>
+              </tr>
+
+            ))}
                 <tr>
-                  <td>Cash</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Accounts Payable</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Accrued Expenses</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Short-term Debt</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Accrued Compensation</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Income Taxes</td>
-                  <td>
-                    <input/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Short-term unearned Revenue</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Security Lending Payable</td>
-                  <td>
-                    <input type="number" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Total Current Liabilities</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
+                  <th>Total Current Liabilities</th>
+                  <th>
+                    {totalcurrentLiabilities}
+                  </th>
                 </tr>
               </tbody>
             </thead>
@@ -198,23 +238,24 @@ function Balancesheet() {
                 </tr>
               </thead>
               <tbody>
+              {noncurrentliabilities.map((noncurrentliability) => (
+                <tr key={noncurrentliability.id}>
+                <td>{noncurrentliability.name}</td>
+                <td>
+                  <input
+                    type= "number"
+                    value={noncurrentliability.value}
+                    onChange={(e) => handleNonLiabChange(e, noncurrentliability.id)}
+                  />
+                </td>
+              </tr>
+
+            ))}
                 <tr>
-                  <td>Property Plant & Equipment</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Intangible Assets</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Total Non-Current Liabilities</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
+                  <th>Total Non-Current Liabilities</th>
+                  <th>
+                    {totalnoncurrentliabilities}
+                  </th>
                 </tr>
               </tbody>
             </thead>
@@ -226,23 +267,23 @@ function Balancesheet() {
                 </tr>
               </thead>
               <tbody>
+              {shares.map((share) => (
+            <tr key={share.id}>
+              <td>{share.name}</td>
+              <td>
+                <input
+                  type= "number"
+                  value={share.value}
+                  onChange={(e) => handleShareChange(e, share.id)}
+                />
+              </td>
+            </tr>
+          ))}
                 <tr>
-                  <td>Common Shares</td>
-                  <td>
-                    <input type="number" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Retained Earnings</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Total Shareholder Equity</td>
-                  <td>
-                    <input type="number"/>
-                  </td>
+                  <th>Total Shareholder Equity</th>
+                  <th>
+                    {totalShares}
+                  </th>
                 </tr>
               </tbody>
             </thead>
@@ -257,7 +298,7 @@ function Balancesheet() {
         <th>
             <td>Total Liabilities</td>
             <td>
-                <input />
+                {totalLiabilities}
             </td>
         </th>
       </tfoot>
