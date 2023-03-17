@@ -10,7 +10,7 @@ function Balancesheet() {
     { id: 4, name: 'Prepaid Expenses', value: 0 },
     {id: 5, name: 'Short-Term Investments', value: 0},
     {id: 6, name: 'Deferred Income Taxes', value: 0},
-    { id: 7, name: 'Other Assets', value: 0 },
+    { id: 7, name: 'Other Current Assets', value: 0 },
   
   ]);
 
@@ -27,6 +27,33 @@ function Balancesheet() {
     });
     setcurrentAssets(newcurrentAssets);
   };
+
+  const [noncurrentassets, setnoncurrentAssets] = useState([
+    { id: 1, name: 'Property Plant & Equipment', value: 0 },
+    { id: 2, name: 'Intangible Assets', value: 0 },
+    { id: 3, name: 'Equity and Other Investment', value: 0 },
+    { id: 4, name: 'Good will', value: 0 },
+    {id: 5, name: 'Deferred Income taxes', value: 0},
+    { id: 7, name: 'Other Non-Current Assets', value: 0 },
+
+  ]);
+
+  const totalnoncurrentassets = noncurrentassets.reduce((acc, noncurrentasset) => acc + parseFloat(noncurrentasset.value), 0);
+
+  const handleNonChange = (event, id) => {
+    const newValue = parseFloat(event.target.value);
+    const newnoncurrentAssets = noncurrentassets.map((noncurrentasset) => {
+      if (noncurrentasset.id === id) {
+        return { ...noncurrentasset, value: newValue };
+      } else {
+        return noncurrentasset;
+      }
+    });
+    setnoncurrentAssets(newnoncurrentAssets);
+  };
+
+  const totalAssets = totalcurrentAssets + totalnoncurrentassets;
+
   
   
     return (
@@ -74,40 +101,22 @@ function Balancesheet() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Property Plant & Equipment</td>
-                  <td>
-                    <input />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Intangible Assets</td>
-                  <td>
-                    <input />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Equity and other Investments</td>
-                  <td>
-                    <input />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Good will</td>
-                  <td>
-                    <input />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Deferred Income Taxes</td>
-                  <td>
-                    <input />
-                  </td>
-                </tr>
+              {noncurrentassets.map((noncurrentasset) => (
+            <tr key={noncurrentasset.id}>
+              <td>{noncurrentasset.name}</td>
+              <td>
+                <input
+                  type= "number"
+                  value={noncurrentasset.value}
+                  onChange={(e) => handleNonChange(e, noncurrentasset.id)}
+                />
+              </td>
+            </tr>
+          ))}
                 <tr>
                   <td>Total Non-Current Assets</td>
                   <td>
-                    
+                    {totalnoncurrentassets}
                   </td>
                 </tr>
               </tbody>
@@ -242,7 +251,7 @@ function Balancesheet() {
         <th>
             <td>Total Assets</td>
             <td>
-                
+               {totalAssets} 
             </td>
         </th>
         <th>
