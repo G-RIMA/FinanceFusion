@@ -3,7 +3,7 @@ import "./balancesheet.css";
 
 function IncomeStatement () {
     const [revenues, setrevenues] = useState([
-        { id: 1, name: 'Revennues', value: 0 },
+        { id: 1, name: 'Revenues', value: 0 },
         { id: 2, name: 'Cost of Goods Sold (COGS)', value: 0 },
       ]);
     
@@ -26,7 +26,7 @@ function IncomeStatement () {
         { id: 2, name: 'R&D', value: 0 },
       ]);
     
-      const EBITDA = ebitdas.reduce((acc, ebitda) => acc + parseFloat(ebitda.value), 0);
+      const EBITDA =grossProfit + (ebitdas.reduce((acc, ebitda) => acc + parseFloat(ebitda.value), 0));
 
       const handleEBITDAChange = (event, id) => {
         const newValue = parseFloat(event.target.value);
@@ -40,7 +40,71 @@ function IncomeStatement () {
         });
         setEbitda(newebitdas);
       };
+
+      const [ebits, setEbit] = useState([
+        { id: 1, name: 'Depreciation and Amortixation', value: 0 },
+      ]);
     
+      const EBIT = EBITDA + (ebits.reduce((acc, ebit) => acc + parseFloat(ebit.value), 0));
+
+      const handleEBITChange = (event, id) => {
+        const newValue = parseFloat(event.target.value);
+        const newebits = ebits.map((ebit) => {
+          if (ebit.id === id) {
+            return { ...ebit, value: newValue };
+          } else {
+            return ebit
+            ;
+          }
+        });
+        setEbit(newebits);
+      };
+
+      const [incomesb4, setIncomesb4] = useState([
+        { id: 1, name: 'Interest Income', value: 0 },
+        { id: 1, name: 'Interest Expense', value: 0 },
+        { id: 1, name: 'Other Income Expenses', value: 0 },
+
+      ]);
+    
+      const IncomeB4 = EBIT + (ebits.reduce((acc, ebit) => acc + parseFloat(ebit.value), 0));
+
+      const handleIB4Change = (event, id) => {
+        const newValue = parseFloat(event.target.value);
+        const newincomesb4 = incomesb4.map((incomeb4) => {
+          if (incomeb4.id === id) {
+            return { ...incomeb4, value: newValue };
+          } else {
+            return incomeb4
+            ;
+          }
+        });
+        setIncomesb4(newincomesb4);
+      };
+
+      const [taxes, setTaxes] = useState([
+        { id: 1, name: 'Taxes', value: 0 },
+
+      ]);
+      const Tax = EBIT + (ebits.reduce((acc, ebit) => acc + parseFloat(ebit.value), 0));
+
+      const handleTaxChange = (event, id) => {
+        const newValue = parseFloat(event.target.value);
+        const newtaxes = taxes.map((tax) => {
+          if (tax.id === id) {
+            return { ...tax, value: newValue };
+          } else {
+            return tax
+            ;
+          }
+        });
+        setTaxes(newtaxes);
+      };
+
+      const NetIncome = IncomeB4 - Tax;
+
+
+
       return (
         <div className="bal-container">
           <h3>Balance Sheet</h3>
@@ -96,6 +160,82 @@ function IncomeStatement () {
                     <th>EBITDA</th>
                     <th>
                       {EBITDA}
+                    </th>
+                  </tr>
+                </tbody>
+              </thead>
+              <thead>
+                <tbody>
+                {ebits.map((ebit) => (
+              <tr key={ebit.id}>
+                <td>{ebit.name}</td>
+                <td>
+                  <input
+                    type= "number"
+                    value={ebit.value}
+                    onChange={(e) => handleEBITChange(e, ebit.id)}
+                  />
+                </td>
+              </tr>
+            ))}
+                  <tr>
+                    <th>EBIT</th>
+                    <th>
+                      {EBIT}
+                    </th>
+                  </tr>
+                </tbody>
+              </thead>
+              <thead>
+                <tbody>
+                {incomesb4.map((incomeb4) => (
+              <tr key={incomeb4.id}>
+                <td>{incomeb4.name}</td>
+                <td>
+                  <input
+                    type= "number"
+                    value={incomeb4.value}
+                    onChange={(e) => handleIB4Change(e, incomeb4.id)}
+                  />
+                </td>
+              </tr>
+            ))}
+                  <tr>
+                    <th>Income Before Taxes</th>
+                    <th>
+                      {IncomeB4}
+                    </th>
+                  </tr>
+                </tbody>
+              </thead>
+              <thead>
+                <tbody>
+                {taxes.map((tax) => (
+              <tr key={tax.id}>
+                <td>{tax.name}</td>
+                <td>
+                  <input
+                    type= "number"
+                    value={tax.value}
+                    onChange={(e) => handleTaxChange(e, tax.id)}
+                  />
+                </td>
+              </tr>
+            ))}
+                  <tr>
+                    <th>Taxes</th>
+                    <th>
+                      {Tax}
+                    </th>
+                  </tr>
+                </tbody>
+              </thead>
+              <thead>
+                <tbody>
+                  <tr>
+                    <th>Net Income</th>
+                    <th>
+                      {NetIncome}
                     </th>
                   </tr>
                 </tbody>
