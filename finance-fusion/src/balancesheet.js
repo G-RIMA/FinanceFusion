@@ -55,13 +55,13 @@ function Balancesheet() {
   const totalAssets = totalcurrentAssets + totalnoncurrentassets;
 
   const [currentliabilities, setcurrentLiabilities] = useState([
-    { id: 1, name: 'Cash', value: 0 },
-    { id: 2, name: 'Accounts Receivable', value: 0 },
-    { id: 3, name: 'Inventory', value: 0 },
-    { id: 4, name: 'Prepaid Expenses', value: 0 },
-    {id: 5, name: 'Short-Term Investments', value: 0},
-    {id: 6, name: 'Deferred Income Taxes', value: 0},
-    { id: 7, name: 'Other Current Assets', value: 0 },
+    { id: 1, name: 'Accounts Payable', value: 0 },
+    { id: 2, name: 'Accrued Expenses', value: 0 },
+    { id: 3, name: 'Short-term Debt', value: 0 },
+    { id: 4, name: 'Accrued Compensation', value: 0 },
+    {id: 5, name: 'Income taxes', value: 0},
+    {id: 6, name: 'Short term unearned revenue', value: 0},
+    { id: 7, name: 'Security Lending Payable', value: 0 },
   
   ]);
 
@@ -80,13 +80,10 @@ function Balancesheet() {
   };
 
   const [noncurrentliabilities, setnoncurrentLiabilities] = useState([
-    { id: 1, name: 'Property Plant & Equipment', value: 0 },
-    { id: 2, name: 'Intangible Assets', value: 0 },
-    { id: 3, name: 'Equity and Other Investment', value: 0 },
-    { id: 4, name: 'Good will', value: 0 },
-    {id: 5, name: 'Deferred Income taxes', value: 0},
-    { id: 7, name: 'Other Non-Current Assets', value: 0 },
-
+    { id: 1, name: 'Long-Term Debt', value: 0 },
+    { id: 2, name: 'Long-Term Unearned Revenue', value: 0 },
+    { id: 3, name: 'Deferred Income Taxes', value: 0 },
+    { id: 4, name: 'Other', value: 0 }
   ]);
 
   const totalnoncurrentliabilities = noncurrentliabilities.reduce((acc, noncurrentliability) => acc + parseFloat(noncurrentliability.value), 0);
@@ -104,13 +101,8 @@ function Balancesheet() {
   };
 
   const [shares, setShares] = useState([
-    { id: 1, name: 'Cash', value: 0 },
-    { id: 2, name: 'Accounts Receivable', value: 0 },
-    { id: 3, name: 'Inventory', value: 0 },
-    { id: 4, name: 'Prepaid Expenses', value: 0 },
-    {id: 5, name: 'Short-Term Investments', value: 0},
-    {id: 6, name: 'Deferred Income Taxes', value: 0},
-    { id: 7, name: 'Other Assets', value: 0 },
+    { id: 1, name: 'Common Shares', value: 0 },
+    { id: 2, name: 'Retained Earnings', value: 0 }
 
   ]);
 
@@ -129,6 +121,9 @@ function Balancesheet() {
   };
 
   const totalLiabilities = totalcurrentLiabilities + totalnoncurrentliabilities + totalShares 
+
+  
+  
   
   
     return (
