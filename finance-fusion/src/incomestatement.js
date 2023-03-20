@@ -62,12 +62,12 @@ function IncomeStatement () {
 
       const [incomesb4, setIncomesb4] = useState([
         { id: 1, name: 'Interest Income', value: 0 },
-        { id: 1, name: 'Interest Expense', value: 0 },
-        { id: 1, name: 'Other Income Expenses', value: 0 },
+        { id: 2, name: 'Interest Expense', value: 0 },
+        { id: 3, name: 'Other Income Expenses', value: 0 },
 
       ]);
     
-      const IncomeB4 = EBIT + (ebits.reduce((acc, ebit) => acc + parseFloat(ebit.value), 0));
+      const IncomeB4 = EBIT + (incomesb4.reduce((acc, incomeb4) => acc + parseFloat(incomeb4.value), 0));
 
       const handleIB4Change = (event, id) => {
         const newValue = parseFloat(event.target.value);
@@ -86,7 +86,7 @@ function IncomeStatement () {
         { id: 1, name: 'Taxes', value: 0 },
 
       ]);
-      const Tax = EBIT + (ebits.reduce((acc, ebit) => acc + parseFloat(ebit.value), 0));
+      const Tax = taxes.reduce((acc, tax) => acc + parseFloat(tax.value), 0);
 
       const handleTaxChange = (event, id) => {
         const newValue = parseFloat(event.target.value);
@@ -101,7 +101,7 @@ function IncomeStatement () {
         setTaxes(newtaxes);
       };
 
-      const NetIncome = IncomeB4 - Tax;
+      const NetIncome = IncomeB4 + Tax;
 
 
 
