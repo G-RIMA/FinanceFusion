@@ -241,6 +241,20 @@ function IncomeStatement () {
                 </tbody>
               </thead>
           </td>
+          <td>
+          <thead>
+              <tr>
+                <th>Ratios</th>
+              </tr>
+              <thead>
+                <tr>
+                  <th>Ratios</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+          </thead>
+          </td>
+          
     </table>
     </div>
 );
