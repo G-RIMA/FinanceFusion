@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./balancesheet.css";
 
-function Income_Statement () {
+function IncomeStatement () {
     const [revenues, setrevenues] = useState([
         { id: 1, name: 'Revennues', value: 0 },
         { id: 2, name: 'Cost of Goods Sold (COGS)', value: 0 },
@@ -22,8 +22,8 @@ function Income_Statement () {
       };
 
       const [ebitdas, setEbitda] = useState([
-        { id: 1, name: 'Revennues', value: 0 },
-        { id: 2, name: 'Cost of Goods Sold (COGS)', value: 0 },
+        { id: 1, name: 'SG&A', value: 0 },
+        { id: 2, name: 'R&D', value: 0 },
       ]);
     
       const EBITDA = ebitdas.reduce((acc, ebitda) => acc + parseFloat(ebitda.value), 0);
@@ -79,29 +79,23 @@ function Income_Statement () {
                 </tbody>
               </thead>
               <thead>
-                <thead>
-                  <tr>
-                    <th>Non-Current Assets</th>
-                    <th>Value</th>
-                  </tr>
-                </thead>
                 <tbody>
                 {ebitdas.map((ebitda) => (
-              <tr key={noncurrentasset.id}>
-                <td>{noncurrentasset.name}</td>
+              <tr key={ebitda.id}>
+                <td>{ebitda.name}</td>
                 <td>
                   <input
                     type= "number"
-                    value={noncurrentasset.value}
-                    onChange={(e) => handleNonChange(e, noncurrentasset.id)}
+                    value={ebitda.value}
+                    onChange={(e) => handleEBITDAChange(e, ebitda.id)}
                   />
                 </td>
               </tr>
             ))}
                   <tr>
-                    <th>Total Non-Current Assets</th>
+                    <th>EBITDA</th>
                     <th>
-                      {totalnoncurrentassets}
+                      {EBITDA}
                     </th>
                   </tr>
                 </tbody>
@@ -110,7 +104,6 @@ function Income_Statement () {
     </table>
     </div>
 );
-
 }
 
-export default Income_Statement;
+export default IncomeStatement;
