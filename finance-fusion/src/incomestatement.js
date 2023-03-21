@@ -4,10 +4,10 @@ import "./balancesheet.css";
 function IncomeStatement () {
     const [revenues, setrevenues] = useState([
         { id: 1, name: 'Revenues', value: 0 },
-        { id: 2, name: 'Cost of Goods Sold (COGS)', value: 0 },
+        
       ]);
-    
-      const grossProfit = revenues.reduce((acc, revenue) => acc + parseFloat(revenue.value), 0);
+
+      const RevNue = revenues.reduce((acc, revenue) => acc + parseFloat(revenue.value), 0);
 
       const handleValueChange = (event, id) => {
         const newValue = parseFloat(event.target.value);
@@ -21,12 +21,37 @@ function IncomeStatement () {
         setrevenues(newrevenues);
       };
 
+    const [cogs, setCogs] = useState([
+      { id:1, name: 'Cost of Goods Sold (COGS)', value: 0 },
+
+    ]);
+    
+      const COGS = cogs.reduce((acc, cog) => acc + parseFloat(cog.value), 0);
+
+      const handleCOGSChange = (event, id) => {
+        const newValue = parseFloat(event.target.value);
+        const newcogs = cogs.map((cog) => {
+          if (cog.id === id) {
+            return { ...cog, value: newValue };
+          } else {
+            return cog;
+          }
+        });
+        setCogs(newcogs);
+      };
+
+
+      const grossProfit = RevNue - COGS;
+
+
       const [ebitdas, setEbitda] = useState([
         { id: 1, name: 'SG&A', value: 0 },
         { id: 2, name: 'R&D', value: 0 },
+        { id:3, name: 'Unusual Expenses(Income)', value: 0},
+        { id:4, name: 'Other Opereating Expences', value: 0}
       ]);
     
-      const EBITDA =grossProfit + (ebitdas.reduce((acc, ebitda) => acc + parseFloat(ebitda.value), 0));
+     const EBITDA = (ebitdas.reduce((acc, ebitda) => acc + parseFloat(ebitda.value), 0));
 
       const handleEBITDAChange = (event, id) => {
         const newValue = parseFloat(event.target.value);
@@ -46,6 +71,9 @@ function IncomeStatement () {
       ]);
     
       const EBIT = EBITDA + (ebits.reduce((acc, ebit) => acc + parseFloat(ebit.value), 0));
+
+      const Operating_Income = grossProfit - EBIT
+
 
       const handleEBITChange = (event, id) => {
         const newValue = parseFloat(event.target.value);
@@ -67,7 +95,7 @@ function IncomeStatement () {
 
       ]);
     
-      const IncomeB4 = EBIT + (incomesb4.reduce((acc, incomeb4) => acc + parseFloat(incomeb4.value), 0));
+      const IncomeB4 = Operating_Income - (incomesb4.reduce((acc, incomeb4) => acc + parseFloat(incomeb4.value), 0));
 
       const handleIB4Change = (event, id) => {
         const newValue = parseFloat(event.target.value);
@@ -83,10 +111,10 @@ function IncomeStatement () {
       };
 
       const [taxes, setTaxes] = useState([
-        { id: 1, name: 'Taxes', value: 0 },
+        { id: 1, name: 'Income Taxes', value: 0 },
 
       ]);
-      const Tax = taxes.reduce((acc, tax) => acc + parseFloat(tax.value), 0);
+      const Tax = IncomeB4 - taxes.reduce((acc, tax) => acc + parseFloat(tax.value), 0);
 
       const handleTaxChange = (event, id) => {
         const newValue = parseFloat(event.target.value);
@@ -101,7 +129,33 @@ function IncomeStatement () {
         setTaxes(newtaxes);
       };
 
-      const NetIncome = IncomeB4 + Tax;
+      const [extras, setExtras] = useState([
+        { id: 1, name: 'Total Extraordinary Items', value: 0 },
+
+      ]);
+      const Extraordinary = extras.reduce((acc, extra) => acc + parseFloat(extra.value), 0);
+
+      const handleExtraChange = (event, id) => {
+        const newValue = parseFloat(event.target.value);
+        const newExtras = extras.map((extra) => {
+          if (extra.id === id) {
+            return { ...extra, value: newValue };
+          } else {
+            return extra
+            ;
+          }
+        });
+        setExtras(newExtras);
+      };
+
+      const NetIncome = Tax - Extraordinary;
+
+      const grossProfitMarginRatio = ((grossProfit) / (RevNue)) * 100;
+      const operatingProfitMarginRatio = ((Operating_Income) / (RevNue)) * 100;
+      const netProfitMarginRatio = ((NetIncome) / (RevNue)) * 100;
+      const taxRatio = (taxes[0].value / (IncomeB4)) * 100;
+      const InterestCoverRatio = ((Operating_Income) / (incomesb4[1].value));
+
 
 
 
@@ -117,7 +171,7 @@ function IncomeStatement () {
                 <thead>
                   <tr>
                     <th>Millions($)</th>
-                    <th>Value</th>
+                    <th>Year 1</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -129,6 +183,27 @@ function IncomeStatement () {
                       type= "number"
                       value={revenue.value}
                       onChange={(e) => handleValueChange(e, revenue.id)}
+                    />
+                  </td>
+                </tr>
+  
+              ))}
+                <tr>
+                    <th>Total Revenue</th>
+                    <th>
+                      {RevNue}
+                    </th>
+                  </tr>
+                </tbody>
+                <tbody>
+                {cogs.map((cog) => (
+                  <tr key={cog.id}>
+                  <td>{cog.name}</td>
+                  <td>
+                    <input
+                      type= "number"
+                      value={cog.value}
+                      onChange={(e) => handleCOGSChange(e, cog.id)}
                     />
                   </td>
                 </tr>
@@ -184,6 +259,12 @@ function IncomeStatement () {
                       {EBIT}
                     </th>
                   </tr>
+                  <tr>
+                    <th>Operating Income</th>
+                    <th>
+                      {Operating_Income}
+                    </th>
+                  </tr>
                 </tbody>
               </thead>
               <thead>
@@ -223,11 +304,27 @@ function IncomeStatement () {
               </tr>
             ))}
                   <tr>
-                    <th>Taxes</th>
+                    <th>Income After Taxes</th>
                     <th>
                       {Tax}
                     </th>
                   </tr>
+                </tbody>
+              </thead>
+              <thead>
+                <tbody>
+                {extras.map((extra) => (
+              <tr key={extra.id}>
+                <td>{extra.name}</td>
+                <td>
+                  <input
+                    type= "number"
+                    value={extra.value}
+                    onChange={(e) => handleExtraChange(e, extra.id)}
+                  />
+                </td>
+              </tr>
+            ))}
                 </tbody>
               </thead>
               <thead>
@@ -243,16 +340,72 @@ function IncomeStatement () {
           </td>
           <td>
           <thead>
-              <tr>
-                <th>Ratios</th>
-              </tr>
+                <h3>Ratio Analysis</h3>
+          </thead>
+
+          <h3>Profitability Ratios</h3>
+          <p>The ratios help to evaluate the ability of a company to generate income relative to revenue, balance sheet assets,
+            operating costs and equity.
+          </p>
+          <thead>
               <thead>
                 <tr>
-                  <th>Ratios</th>
+                  <th>Profitability Ratios</th>
                   <th>Value</th>
                 </tr>
               </thead>
+              <thead>
+                <tr>
+                  <td>Gross Margin</td>
+                  <td>{grossProfitMarginRatio}</td>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <td>Operating Margin</td>
+                  <td>{operatingProfitMarginRatio}</td>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <td>Net Profit Margin</td>
+                  <td>{netProfitMarginRatio}</td>
+                </tr>
+              </thead>
           </thead>
+              <h3>Efficiency Ratios</h3>
+              <p>They show how well a company is utilizing its assets and resources.</p>                
+                <thead>
+                  <tr>
+                    <th>Efficiency Ratios</th>
+                    <th>Value</th>
+                  </tr>
+                
+                </thead>
+                <thead>
+                  <tr>
+                    <td>Tax Ratio</td>
+                    <td>{taxRatio}</td>
+                  </tr>
+                </thead>
+              
+
+            <h3>Solvency Ratios(Interest Coverage Ratios</h3>
+            <p> Determine whether a company will be able to cover what it owes in interest to its creditors</p>
+            <thead>
+                <tr>
+                  <th>Solvency Ratios</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <thead>
+                <tr>
+                  <td>Interest Cover Ratio</td>
+                  <td>{InterestCoverRatio}</td>
+                </tr>
+              </thead>
+              
+          
           </td>
           
     </table>
