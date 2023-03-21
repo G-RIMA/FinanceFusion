@@ -148,8 +148,9 @@ function IncomeStatement () {
         setExtras(newExtras);
       };
 
-      const NetIncome = Tax - Extraordinary;
-
+      
+      const NetIncome = (Tax - Extraordinary);
+      
       const grossProfitMarginRatio = ((grossProfit) / (RevNue)) * 100;
       const operatingProfitMarginRatio = ((Operating_Income) / (RevNue)) * 100;
       const netProfitMarginRatio = ((NetIncome) / (RevNue)) * 100;
