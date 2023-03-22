@@ -13,8 +13,6 @@ function App() {
         <Header />
 
       </div>
-
-      <Brand />
       <WhatFF />
       <Features />
       <Possibility />
