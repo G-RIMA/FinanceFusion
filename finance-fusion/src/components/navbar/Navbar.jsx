@@ -11,7 +11,7 @@ const Navbar = () => {
     <div className='ff__navbar'>
       <div className='ff__navbar-links'>
         <div className='ff__navbar-links_logo'>
-          <h1>FINANCE FUSION</h1>
+          <h1 className="gradient__text">FINANCE FUSION</h1>
         </div>
         <div className='ff__navbar-links_container'>
           <p><a href='#home'>Home</a></p>
