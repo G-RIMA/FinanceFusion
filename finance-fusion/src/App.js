@@ -1,25 +1,27 @@
 import './App.css';
 import React from "react";
-import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Balancesheet from './pages/balancesheet';
-import IncomeStatement from './pages/incomestatement';
-import CashFLow from './pages/cashflow';
-import LandingPage from './pages/LandingPage';
-import './App.css';
 
+import { Footer, Blog, Possibility,Features, WhatFF, Header } from './containers';
+import { CTA, Brand, Navbar } from './components';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path='/home' exact component={LandingPage} />
-        <Route path='/balancesheet' exact component={Balancesheet} />
-        <Route path='/cashflow' component={CashFLow} />
-        <Route path='/incomestatement' component={IncomeStatement} />
-      </Routes>
-    </Router>
+    <div className='App'>
+      <div className='gradient_bg'>
+        <Navbar />
+        <Header />
+
+      </div>
+
+      <Brand />
+      <WhatFF />
+      <Features />
+      <Possibility />
+      <CTA />
+      <Blog />
+      <Footer />
+
+    </div>
   );
 }
 
