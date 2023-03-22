@@ -13,7 +13,6 @@ function App() {
         <Header />
 
       </div>
-      <WhatFF />
       <Features />
       <Possibility />
       <CTA />

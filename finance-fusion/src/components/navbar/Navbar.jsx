@@ -15,10 +15,10 @@ const Navbar = () => {
         </div>
         <div className='ff__navbar-links_container'>
           <p><a href='#home'>Home</a></p>
-          <p><a href='#About'></a>About</p>
+          <p><a href='#features'></a>Features</p>
+          <p><a href='#whatff'>Why Finance Fusion?</a></p>
           <p><a href='#Blog'></a>Blog</p>
-          <p><a href='#Contact'>Contact</a></p>
-          <p><a href='#FS'>Financial Statements</a></p>
+          <p><a href='#FF'>Financial Statements</a></p>
         </div>
         <div className='ff__navbar-sign'>
           <p>Sign In</p>

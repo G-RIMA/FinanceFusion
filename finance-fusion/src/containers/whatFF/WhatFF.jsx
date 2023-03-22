@@ -3,8 +3,8 @@ import './whatFF.css';
 
 const WhatFF = () => {
   return (
-    <div>
-      WhatFF
+    <div className='ff__whatff section__margin' id='whatff'>
+      
     </div>
   )
 }
