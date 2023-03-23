@@ -7,7 +7,7 @@ import { CTA, Navbar } from './components';
 
 function App() {
   return (
-    <div className='App'>
+    <div className='App scale-up-center'>
       <div className='gradient__bg'>
         <Navbar />
         <Header />
