@@ -3,8 +3,11 @@ import './footer.css';
 
 const Footer = () => {
   return (
-    <div>
-      Footer
+    <div className='ff__footer section_padding'>
+      <div className='ff__footer-content'>
+        
+      </div>
+      
     </div>
   )
 }

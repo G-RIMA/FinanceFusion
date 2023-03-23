@@ -4,7 +4,7 @@ import './header.css';
 
 const Header = () => {
   return(
-    <div className='ff__header section' id="home">
+    <div className='ff__header section_padding' id="home">
       <div className='ff__header-content'>
         <h1 className='gradient__text'>Calculate and Get Your Financial Statements in an Instance</h1>
         <p>

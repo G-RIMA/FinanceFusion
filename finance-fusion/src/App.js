@@ -2,8 +2,8 @@ import './App.css';
 import React from "react";
 import './index.css';
 
-import { Footer, Blog, Possibility,Features, WhatFF, Header } from './containers';
-import { CTA, Brand, Navbar } from './components';
+import { Footer, Blog, Features, Header } from './containers';
+import { CTA, Navbar } from './components';
 
 function App() {
   return (
@@ -14,7 +14,6 @@ function App() {
 
       </div>
       <Features />
-      <Possibility />
       <CTA />
       <Blog />
       <Footer />

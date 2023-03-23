@@ -39,6 +39,10 @@ a {
   -webkit-text-fill-color: transparent;
 }
 
+.gradient__text__features {
+  color: var(--dark-color);
+}
+
 .section__padding {
   padding: 4rem 6rem;
 }
