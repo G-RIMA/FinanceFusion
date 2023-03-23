@@ -105,7 +105,7 @@ function CashFLow () {
 
       return (
         <div className="bal-container">
-          <h3>Balance Sheet</h3>
+          <h3>Cash Flow Statement</h3>
           <table class="my-table">
             <td>
               <thead>

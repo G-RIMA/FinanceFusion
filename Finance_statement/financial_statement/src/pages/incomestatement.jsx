@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as FileSaver from "file-saver";
 import "./balancesheet.css";
 
 function IncomeStatement () {
@@ -157,12 +158,16 @@ function IncomeStatement () {
       const taxRatio = (taxes[0].value / (IncomeB4)) * 100;
       const InterestCoverRatio = ((Operating_Income) / (incomesb4[1].value));
 
-
+      const handleDownload = () => {
+        const table = document.querySelector("table").outerHTML;
+        const blob = new Blob([table], { type: "text/html;charset=utf-8" });
+        FileSaver.saveAs(blob, "table.html");
+      };
 
 
       return (
         <div className="bal-container">
-          <h3>Balance Sheet</h3>
+          <h3>Income Statement</h3>
           <table class="my-table">
             <td>
               <thead>
@@ -410,6 +415,9 @@ function IncomeStatement () {
           </td>
           
     </table>
+    <button onClick={handleDownload}>
+      Download Table
+    </button>
     </div>
 );
 }
