@@ -8,7 +8,7 @@ The links to the deplyed app is: https://finance-fusion.vercel.app/
 to deply the app from the terminal just reun
 npm run
 
-# WHAT THE APP HAS:
+## WHAT THE APP HAS:
 There are two folders:
  ## 1. Finance_statement
  This contains the balance sheet, cash flow statement and Income statement in the pages folder that creates and deploys them on one page.
@@ -38,6 +38,13 @@ total liabilites: const totalLiabilities = totalcurrentLiabilities + totalnoncur
 This statement is in the cashflow.jsx it has the same concept as the balance sheet
 It adds the operating activities, financial activities, and the investing activities.
 They add the values separately then gives the total as change in cash ..
+
+# Income Statement
+This statement is the same as before but it has an added functionality:
+It has ratio analysis and calculates the ratios according to the values inputed in the table.
+Soon will add more useful values that will help the user do a pyramid analysis
+This one does a vertical analysis but not a horizontal one yet:
+This will be added a soon .
 
 ### This is a simple Financial Statements app weh can make improvements on it:
  make it so that the user can do financial analysis on the app
