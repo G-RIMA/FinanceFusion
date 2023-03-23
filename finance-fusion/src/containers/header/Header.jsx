@@ -14,7 +14,7 @@ const Header = () => {
         </p>
 
         <div className='ff__header-content__input'>
-          <button type='button'>Get Started</button>
+          <a href='https://finance-fusion.vercel.app/'><button type='button'>Get Started</button></a>
         </div>
       </div>
       <div className='ff__header-image'>

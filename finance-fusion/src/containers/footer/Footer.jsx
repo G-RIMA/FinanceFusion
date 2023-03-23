@@ -9,7 +9,7 @@ const Footer = () => {
     </div>
 
     <div className="ff__footer-btn">
-      <p>Request Early Access</p>
+      <a href="https://finance-fusion.vercel.app/"><p>Start Now</p></a>
     </div>
 
     <div className="ff__footer-links">
