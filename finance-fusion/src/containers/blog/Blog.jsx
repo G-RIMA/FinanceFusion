@@ -10,13 +10,12 @@ const Blog = () => {
     </div>
     <div className="ff__blog-container">
       <div className="ff__blog-container_groupA">
-        <Article date="Sep 26, 2021" text="GPT-3 and Open  AI is the future. Let us exlore how it is?" />
+        <Article date="Sep 26, 2021" text="Why we need the three Financial Statement" />
       </div>
       <div className="ff__blog-container_groupB">
-        <Article  date="Sep 26, 2021" text="GPT-3 and Open  AI is the future. Let us exlore how it is?" />
-        <Article date="Sep 26, 2021" text="GPT-3 and Open  AI is the future. Let us exlore how it is?" />
-        <Article date="Sep 26, 2021" text="GPT-3 and Open  AI is the future. Let us exlore how it is?" />
-        <Article date="Sep 26, 2021" text="GPT-3 and Open  AI is the future. Let us exlore how it is?" />
+        <Article  date="Sep 26, 2021" text="Financial analysis" />
+        <Article date="Sep 26, 2021" text="Reading Financial Statement" />
+        <Article date="Sep 26, 2021" text="Budgeting" />
       </div>
     </div>
   </div>
