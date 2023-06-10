@@ -8,7 +8,7 @@ The links to the deplyed app is: https://finance-fusion.vercel.app/
 to deply the app from the terminal just reun
 npm run
 
-# WHAT THE APP HAS:
+## WHAT THE APP HAS:
 There are two folders:
  ## 1. Finance_statement
  This contains the balance sheet, cash flow statement and Income statement in the pages folder that creates and deploys them on one page.
